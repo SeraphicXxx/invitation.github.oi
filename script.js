@@ -295,39 +295,45 @@ function animateInvitationConfetti(element) {
 }
 
 function addScrollAnimations() {
-    const observer = new IntersectionObserver(function (entries) {
+
+    const sectionObserver = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                sectionObserver.unobserve(entry.target);
             }
         });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.name-card, .event-info, .ninong-ninang-section, .health-section, .gift-section, .rsvp-container, .quote-container').forEach(section => {
+    document.querySelectorAll(
+        '.name-card, .event-info, .ninong-ninang-section, ' +
+        '.health-section, .gift-section, .rsvp-container, .quote-container'
+    ).forEach(section => {
         section.style.opacity = '0';
         section.style.transform = 'translateY(30px)';
         section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        observer.observe(section);
+        sectionObserver.observe(section);
     });
 
-    const cardObserver = new IntersectionObserver(function (entries) {
-        entries.forEach((entry, i) => {
+    const godparentObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
                 setTimeout(() => {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
                 }, entry.target.dataset.delay || 0);
+                godparentObserver.unobserve(entry.target);
             }
         });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.health-card, .gift-card, .godparent-item').forEach((card, i) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        card.dataset.delay = i * 80;
-        cardObserver.observe(card);
+    document.querySelectorAll('.godparent-item').forEach((item, i) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        item.dataset.delay = i * 50;
+        godparentObserver.observe(item);
     });
 }
 
