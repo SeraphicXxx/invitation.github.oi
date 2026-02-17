@@ -606,11 +606,6 @@ body.invitation-visible {
     flex-shrink: 0;
 }
 
-/* ============================================================
-   SECTION-LEVEL SCROLL ANIMATIONS
-   The entire health-section and gift-section slide in as one
-   block when they enter the viewport. No per-card animations.
-   ============================================================ */
 
 .health-section,
 .gift-section {
@@ -626,7 +621,6 @@ body.invitation-visible {
     transform: translateY(0);
 }
 
-/* ============================================================ */
 
 .health-section {
     padding: 60px 40px;
@@ -1241,6 +1235,7 @@ body.invitation-visible {
     }
 
     .choice-text {
-        font-size: 12px;
+        font-size: 10px;
     }
 }
+
